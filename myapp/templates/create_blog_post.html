@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Blog Post{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    /* Main Container */
+    .create-blog-post-container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #F5F5F5;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #004080;
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Form Group Styling */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+    .form-group textarea {
+        height: 150px;
+    }
+
+    /* Submit Button Styling */
+    .submit-button {
+        background-color: #FF8200;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+        background-color: #cc6800;
+    }
+</style>
+
+<div class="create-blog-post-container">
+    <h2>Create a New Blog Post</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_title">Title</label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_author">Author</label>
+            {{ form.author }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_content">Content</label>
+            {{ form.content }}
+        </div>
+
+        <button type="submit" class="submit-button">Create Post</button>
+    </form>
+</div>
+
+{% endblock %}
