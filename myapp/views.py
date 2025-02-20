@@ -3,15 +3,15 @@ import json
 from requests.auth import HTTPBasicAuth
 import requests
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from .models import BlogPost
 from myapp.credentials import MpesaAccessToken, LipanaMpesaPpassword
+
+
 
 
 def landing(request):
     return render(request, 'landing.html')
-def index(request):
-    return render(request, 'index.html')
-
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -75,12 +75,6 @@ def user_register(request):
 
 
 
-
-def landing(request):
-    return render(request, 'landing.html')
-
-
-
 def about_contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -94,50 +88,19 @@ def about_contact(request):
     return render(request, 'about_contact.html', {'form': form})
 
 
-
-
-
-
-
-
-def view_blog_post(request):
+def blog_list(request):
     blog_posts = BlogPost.objects.all().order_by('-created_at')
-    return render(request, 'view_blog_post.html', {'blog_posts': blog_posts})
-
-
-from django.shortcuts import render
+    return render(request, 'blog_list.html', {'blog_posts': blog_posts})
 
 def user_profile(request):
-    return render(request, 'profile.html')  # Make sure to create the profile.html template
-
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import BookClub
-from .forms import BookClubForm
-
+    return render(request, 'profile.html')
+def blog_detail(request):
+    return render(request, 'blog_list.html')
 
 def book_club_list(request):
     """View all book clubs"""
     clubs = BookClub.objects.all()
     return render(request, 'view_book_clubs.html', {'clubs': clubs})
-
-
-def create_book_club(request):
-    """Create a new book club"""
-    if request.method == 'POST':
-        form = BookClubForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Book club created successfully!")
-            return redirect('view_book_clubs')
-    else:
-        form = BookClubForm()
-
-    return render(request, 'create_book_club.html', {'form': form})
-
-
-
 
 def donate_book(request):
     if request.method == 'POST':
@@ -151,85 +114,12 @@ def donate_book(request):
 
     return render(request, 'donate_book.html', {'form': form})
 
-
-def monetary_donation(request):
-    return render(request, 'monetary_donation.html')
-
-
-
-
-
-def book_list(request):
-    query = request.GET.get('search', '')
-    genre_filter = request.GET.get('genre', '')
-
-    books = BookExchange.objects.all()
-
-    if query:
-        books = books.filter(book_title__icontains=query) | books.filter(author__icontains=query)
-
-    if genre_filter:
-        books = books.filter(genre=genre_filter)
-
-    return render(request, 'view_books_catalogue.html', {'books': books})
-
-
-def upload_book(request):
-    if request.method == 'POST':
-        form = BookExchangeForm(request.POST, request.FILES)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.payment_status = False  # Assume payment is pending
-            book.save()
-            messages.success(request, "Your book has been listed! Please complete the payment of 20 KES.")
-            return redirect('pay', book.id)
-    else:
-        form = BookExchangeForm()
-
-    return render(request, 'upload_book_form.html', {'form': form})
-
-
-
-
-def impacts(request):
-    return render(request, 'impacts.html')
-
-
 def view_book_clubs(request):
     return render(request, 'view_book_clubs.html')
 
-def view_books_catalogue(request):
-    return render(request, 'view_books_catalogue.html')
-
-
-
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .models import BookExchange, ContactMessage, BlogPost
-
-from django.contrib.auth.decorators import user_passes_test
 
 def is_admin(user):
     return user.is_superuser
-
-@login_required
-@user_passes_test(is_admin)
-def admin_dashboard(request):
-    users_count = User.objects.count()
-    books_count = BookExchange.objects.count()
-    messages_count = ContactMessage.objects.count()
-    blogs_count = BlogPost.objects.count()
-
-    context = {
-        'users_count': users_count,
-        'books_count': books_count,
-        'messages_count': messages_count,
-        'blogs_count': blogs_count,
-    }
-    return render(request, 'admin_dashboard.html', context)
-
 
 def view_donated_books(request):
     donated_books = BookDonation.objects.all()
@@ -240,35 +130,6 @@ def view_donated_books(request):
         book.delivery_option_display = dict(BookDonation.DELIVERY_OPTIONS).get(book.delivery_option)
 
     return render(request, 'view_donated_books.html', {'donated_books': donated_books})
-
-# views.py
-from django.shortcuts import render, redirect
-from .models import BookDonation
-from .forms import BookDonationForm
-
-def book_exchange(request):
-    # Retrieve all donated books
-    donated_books = BookDonation.objects.all()
-
-    # Handle the form submission
-    if request.method == 'POST':
-        form = BookDonationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('book_exchange')  # Redirect back to the book exchange page after submission
-    else:
-        form = BookDonationForm()
-
-    return render(request, 'books_for_all.html', {'form': form, 'donated_books': donated_books})
-
-
-
-
-
-
-
-
-
 
 
 
@@ -282,7 +143,7 @@ def token(request):
         mpesa_access_token = json.loads(r.text)
         validated_mpesa_access_token = mpesa_access_token["access_token"]
 
-        return render(request, 'token.html', {"token": validated_mpesa_access_token})
+        return render(request, 'pay.html', {"token": validated_mpesa_access_token})
 
 def pay(request):
         return render(request, 'pay.html')
@@ -311,7 +172,7 @@ def stk(request):
             return HttpResponse("Request sent successfully check your phone to input pin")
 
 
-from django.shortcuts import render, redirect
+
 from .models import BookClub
 from .forms import BookClubForm
 
@@ -337,11 +198,6 @@ def add_book_club(request):
     return render(request, 'add_book_club.html', {'form': form})
 
 
-
-
-
-
-from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from .forms import BlogForm
 
@@ -349,9 +205,6 @@ def blog_list(request):
     blogs = Blog.objects.all().order_by('-date_posted')
     return render(request, 'blog_list.html', {'blogs': blogs})
 
-def blog_detail(request, pk):
-    blog = get_object_or_404(Blog, pk=pk)
-    return render(request, 'blog_detail.html', {'blog': blog})
 
 def blog_create(request):
     if request.method == 'POST':
@@ -364,13 +217,7 @@ def blog_create(request):
     return render(request, 'blog_create.html', {'form': form})
 
 
-from django.shortcuts import render, redirect
-from .models import BookDonation
-from .forms import BookDonationForm
 
-
-
-from django.shortcuts import render, redirect
 from .models import BookDonation
 from .forms import BookDonationForm
 
@@ -436,27 +283,53 @@ def upload_book(request):
 
     return render(request, 'upload_book.html', {'form': form})
 
-from django.shortcuts import render
-from .models import Book
 
-def exchanged_books(request):
-    exchanged = Book.objects.filter(exchanged=True)  # Assuming an "exchanged" field exists
-    return render(request, 'exchanged_books.html', {'books': exchanged})
+def index(request):
+    impact, created = ImpactData.objects.get_or_create(id=1)  # Ensure a default record exists
+
+    context = {
+        "students_impacted": impact.students_impacted,
+        "schools_reached": impact.schools_reached,
+        "book_exchanges": impact.book_exchanges,
+        "books_donated": impact.books_donated,
+    }
+    return render(request, 'index.html', context)
+
+
 
 from django.shortcuts import render, get_object_or_404, redirect
+from .models import ImpactData
+from .forms import ImpactDataForm
+
+def edit_impact(request):
+    impact_data = ImpactData.objects.first()  # Get the first impact data entry
+    if not impact_data:
+        impact_data = ImpactData.objects.create()  # Create default entry if none exists
+
+    if request.method == "POST":
+        form = ImpactDataForm(request.POST, instance=impact_data)
+        if form.is_valid():
+            form.save()
+            return redirect('edit_impact')  # Refresh the page after saving
+
+    else:
+        form = ImpactDataForm(instance=impact_data)
+
+    return render(request, 'edit_impact.html', {'form': form})
 
 
-def exchange_book(request, book_id):
-    book = get_object_or_404(Book, id=book_id)  # Check if the book exists
-    return render(request, 'exchange_book.html', {'book': book})  # Redirect to payment
 
-def book_payment(request, book_id):
-    book = Book.objects.get(id=book_id)
+from django.contrib import admin
+from django.template.response import TemplateResponse
 
-    if request.method == 'POST':
-        book.exchanged = True  # Mark book as exchanged
-        book.save()
-        messages.success(request, f'Payment successful! {book.title} is now awaiting delivery.')
-        return redirect('exchanged_books')  # Redirect to exchanged books page
+class CustomAdminSite(admin.AdminSite):
+    site_header = "My Custom Admin"
+    index_template = "admin/custom_index.html"
 
-    return render(request, 'payment.html', {'book': book})
+    def index(self, request, extra_context=None):
+        return TemplateResponse(request, self.index_template, extra_context)
+
+admin_site = CustomAdminSite(name='custom_admin')
+
+
+

@@ -1,0 +1,99 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Books For All Admin - {{ block.super }}{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        /* 📌 General Styling */
+        body {
+            background-color: #F5F5F5; /* Light Gray Background */
+        }
+
+        /* 📌 Admin Header */
+        div#header {
+            background: #004080 !important; /* Deep Blue */
+            color: white;
+            padding: 15px;
+        }
+
+        /* 📌 Admin Page Title */
+        .module caption {
+            background: #FF8200 !important; /* Bright Orange */
+            color: white;
+            font-size: 18px;
+            padding: 8px;
+        }
+
+        /* 📌 Buttons */
+        input[type="submit"], button {
+            background: #3CB371; /* Soft Green */
+            color: white;
+            border-radius: 5px;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background: #2E8B57; /* Darker Green */
+        }
+
+        /* 📌 Table Styling */
+        .module table {
+            border: 1px solid #333333; /* Dark Gray */
+        }
+
+        .module table thead {
+            background: #004080;
+            color: white;
+        }
+
+        /* 📌 Footer */
+        #footer {
+            background: #333333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* 📌 Dark Mode */
+        .dark-mode {
+            background-color: #222 !important;
+            color: white !important;
+        }
+        .dark-mode .module caption {
+            background: #FF8200 !important;
+            color: black !important;
+        }
+    </style>
+
+    {% endblock %}
+
+{% block extrahead %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("📚 Custom Admin Panel Loaded");
+
+            // Create a Dark Mode Toggle Button
+            let themeToggle = document.createElement("button");
+            themeToggle.innerText = "Toggle Dark Mode";
+            themeToggle.style.background = "#FF8200";
+            themeToggle.style.color = "white";
+            themeToggle.style.padding = "8px";
+            themeToggle.style.borderRadius = "5px";
+            themeToggle.style.cursor = "pointer";
+            themeToggle.style.marginLeft = "10px";
+
+            document.getElementById("header").appendChild(themeToggle);
+
+            themeToggle.addEventListener("click", function () {
+                document.body.classList.toggle("dark-mode");
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block branding %}
+    <h1 style="color: #FF8200;">📚 Books For All Admin Panel</h1>
+{% endblock %}

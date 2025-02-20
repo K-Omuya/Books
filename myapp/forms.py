@@ -1,20 +1,17 @@
-
-from .models import ContactMessage
-
+from .models import PledgedBook, Blog,BookClub,ContactMessage
+from .models import BookDonation
 from .models import BookExchange
-
-
-
-
+from django.contrib.auth.models import User
 from django import forms
+from .models import ImpactData
+
+
+
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
-
-
-from django import forms
-from django.contrib.auth.models import User
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label="Password")
@@ -35,8 +32,6 @@ class RegisterForm(forms.ModelForm):
         return cleaned_data
 
 
-
-
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
@@ -44,23 +39,11 @@ class ContactForm(forms.ModelForm):
 
 
 
-from django import forms
-from .models import BookClub
-
 class BookClubForm(forms.ModelForm):
     class Meta:
         model = BookClub
         fields = ['school_name', 'county', 'students_count', 'patron_name', 'patron_contact']
 
-
-
-
-
-
-
-
-from django import forms
-from django.apps import apps
 
 class DynamicModelForm(forms.ModelForm):
     def __init__(self, model, *args, **kwargs):
@@ -74,35 +57,30 @@ class DynamicModelForm(forms.ModelForm):
 
 
 
-from django import forms
-from .models import Blog
-
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['title', 'content', 'author']
-
-from django import forms
-from .models import BookDonation
 
 
 class BookDonationForm(forms.ModelForm):
     class Meta:
         model = BookDonation
         fields = ['donor_name', 'donor_email', 'book_title', 'book_type', 'delivery_option', 'book_image']
-from django import forms
-from .models import PledgedBook
 
 class PledgedBookForm(forms.ModelForm):
     class Meta:
         model = PledgedBook
         fields = ['donor_name', 'donor_email', 'book_title', 'book_type']
 
-
-from django import forms
-from .models import BookExchange
-
 class BookExchangeForm(forms.ModelForm):
     class Meta:
         model = BookExchange
         fields = ['title', 'author', 'genre', 'donor_name', 'contact_details', 'location', 'delivery_option', 'image']
+
+
+
+class ImpactDataForm(forms.ModelForm):
+    class Meta:
+        model = ImpactData
+        fields = ['students_impacted', 'schools_reached', 'book_exchanges', 'books_donated']

@@ -1,6 +1,3 @@
-from django.db import models
-
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -161,3 +158,14 @@ class BookExchange(models.Model):
 
     def __str__(self):
         return self.title
+
+from django.db import models
+
+class ImpactData(models.Model):
+    students_impacted = models.PositiveIntegerField(default=0)
+    schools_reached = models.PositiveIntegerField(default=0)
+    book_exchanges = models.PositiveIntegerField(default=0)
+    books_donated = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"Impact Data - Students: {self.students_impacted}, Schools: {self.schools_reached}"

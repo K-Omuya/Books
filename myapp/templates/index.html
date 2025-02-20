@@ -71,24 +71,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Impact Highlights Section */
-.impact-highlights {
-    padding: 50px 20px;
-    background-color: #fff;
-    text-align: center;
-}
-
-.impact-highlights h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: #004080;
-}
-
-.impact-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
 
 .card {
     background-color: #f8f8f8;
@@ -97,6 +79,48 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
+
+.impact-container {
+    background-color: #f5f5f5; /* Light gray background */
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.impact-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #004080; /* Deep Blue */
+    margin-bottom: 20px;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.impact-item {
+    background: white;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.impact-item:hover {
+    transform: scale(1.05);
+    background-color: #ff8200; /* Bright Orange */
+    color: white;
+}
+
+
 
 .card:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -217,28 +241,16 @@ body {
     </div>
 </header>
 
-<!-- Impact Highlights Section -->
-  <section class="impact-highlights">
-    <h2>Our Impact</h2>
-    <div class="impact-cards">
-      <div class="card">
-        <h3>Students Impacted</h3>
-        <p id="students-impacted">{{ students_impacted }}</p>
-      </div>
-      <div class="card">
-        <h3>Schools Reached</h3>
-        <p id="schools-reached">{{ schools_reached }}</p>
-      </div>
-      <div class="card">
-        <h3>Exchanges</h3>
-        <p id="exchanges">{{ exchanges }}</p>
-      </div>
-      <div class="card">
-        <h3>Books Donated</h3>
-        <p id="books-donated">{{ books_donated }}</p>
-      </div>
+   <!-- Impact Section -->
+    <div class="impact-container">
+        <div class="impact-title">📚 Our Impact</div>
+        <div class="impact-grid">
+            <div class="impact-item">Students Impacted: <span id="students">{{ students_impacted }}</span></div>
+            <div class="impact-item">Schools Reached: <span id="schools">{{ schools_reached }}</span></div>
+            <div class="impact-item">Book Exchanges: <span id="exchanges">{{ book_exchanges }}</span></div>
+            <div class="impact-item">Books Donated: <span id="books">{{ books_donated }}</span></div>
+        </div>
     </div>
-  </section>
 
 <!-- Blogs Section -->
 <section class="blogs-preview">
@@ -253,9 +265,30 @@ body {
         {% endfor %}
     </div>
     <div class="view-all">
-        <a href="{% url 'view_blog_post' %}">View All Blogs</a>
+        <a href="{% url 'blog_list' %}">View All Blogs</a>
     </div>
 </section>
+    <script>
+    function animateNumbers(id, target) {
+        let count = 0;
+        let interval = setInterval(() => {
+            count += Math.ceil(target / 50);
+            if (count >= target) {
+                count = target;
+                clearInterval(interval);
+            }
+            document.getElementById(id).textContent = count.toLocaleString();
+        }, 30);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        animateNumbers("students", {{ students_impacted }});
+        animateNumbers("schools", {{ schools_reached }});
+        animateNumbers("exchanges", {{ book_exchanges }});
+        animateNumbers("books", {{ books_donated }});
+    });
+</script>
+
 
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}

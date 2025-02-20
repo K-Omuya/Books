@@ -3,9 +3,19 @@
 {% block title %}Book Exchange{% endblock %}
 
 {% block content %}
+    {% load static %}
     <style>
+    .page{
+        background: url("{% static '6kids.jpg' %}") no-repeat center center/cover;
+
+    }
+    .body{
+
+    }
+
     /* Book Exchange Container (Avoids affecting base file) */
     .book-exchange-container {
+
         max-width: 1100px;
         margin: auto;
         background-color: #FFFFFF;
@@ -48,7 +58,7 @@
     .book-exchange-container .upload-btn {
         display: block;
         width: fit-content;
-        background-color: #004080;
+        background-color: #FF8200;
         color: white;
         padding: 8px;
         text-decoration: none;
@@ -58,6 +68,8 @@
 
     /* Books Grid */
     .book-exchange-container .books-grid {
+         background: url("{% static '6kids.jpg' %}") no-repeat center center/cover;
+
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 15px;
@@ -109,7 +121,7 @@
     /* Exchange Button */
     .book-exchange-container .exchange-btn {
         display: block;
-        background-color: #3CB371;
+        background-color: #FF8200;
         color: white;
         padding: 6px 12px;
         border-radius: 5px;
@@ -130,6 +142,8 @@
         font-size: 14px;
     }
 </style>
+<div class="page">
+<div class="body">
 <div class="book-exchange-container">
     <h2 class="page-title">Find & Exchange Books</h2>
 
@@ -161,7 +175,7 @@
                     <p class="book-author">{{ book.author }}</p>
                     <p class="book-genre"><strong>Genre:</strong> {{ book.genre }}</p>
                     <p class="book-location">📍 {{ book.location }}</p>
-                    <a href="{% url 'book_payment' book.id %}" class="exchange-btn">Exchange</a>
+                    <a href="{% url 'pay'  %}" class="exchange-btn">Exchange</a>
                 </div>
             </div>
         </div>
@@ -169,6 +183,8 @@
         <p class="no-books">No books available for exchange.</p>
         {% endfor %}
     </div>
+</div>
+</div>
 </div>
 {% endblock %}
 
