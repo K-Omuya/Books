@@ -1,153 +1,34 @@
 {% extends 'base.html' %}
 
-{% block title %}View & Create Book Clubs{% endblock %}
+{% block title %}Create Blog Post{% endblock %}
 
 {% block content %}
-{% load static %}
-
-<style>
-    /* Main Container */
-    .view-clubs-container {
-        max-width: 1000px;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: #F5F5F5;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-        color: #004080;
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-
-    /* Club Cards Section */
-    .club-cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    /* Club Card Styling */
-    .club-card {
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-    }
-
-    .club-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .club-card img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
-    }
-
-    .club-card h3 {
-        color: #333333;
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-    }
-
-    .club-card p {
-        color: #777777;
-        font-size: 1rem;
-        margin-bottom: 15px;
-    }
-
-    .club-card .genre,
-    .club-card .schedule {
-        font-size: 0.9rem;
-        color: #004080;
-        margin-top: 10px;
-    }
-
-    /* Create Club Form */
-    .create-club-form {
-        margin-top: 40px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .create-club-form input,
-    .create-club-form textarea,
-    .create-club-form select {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .create-club-form button {
-        background-color: #FF8200;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .create-club-form button:hover {
-        background-color: #cc6800;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .view-clubs-container {
-            padding: 15px;
-        }
-
-        .club-cards-container {
-            grid-template-columns: 1fr;
-        }
-
-        h2 {
-            font-size: 1.6rem;
-        }
-    }
-</style>
-
-<div class="view-clubs-container">
-    <h2>Book Clubs Available</h2>
-
-    {% if book_clubs %}
-        <div class="club-cards-container">
-            {% for club in book_clubs %}
-                <div class="club-card">
-                    <img src="{{ club.image_url }}" alt="{{ club.name }} logo">
-                    <h3>{{ club.name }}</h3>
-                    <p>{{ club.description|truncatewords:20 }}</p>
-                    <div class="genre">Preferred Genre: {{ club.genre }}</div>
-                    <div class="schedule">Meeting Schedule: {{ club.meeting_schedule }}</div>
-                </div>
-            {% endfor %}
+    {% load static %}
+  <!-- Create Blog Post Section -->
+  <section class="create-blog-post">
+    <div class="container">
+      <h2>Create Blog Post</h2>
+      <form action="{% url 'create_blog_post' %}" method="post" enctype="multipart/form-data" class="form-flex">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Title" required>
         </div>
-    {% else %}
-        <p class="no-clubs-message">No book clubs available at the moment. Check back later!</p>
-    {% endif %}
-
-    <h2>Create a New Book Club</h2>
-    <div class="create-club-form">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- This will render the form fields as paragraphs -->
-            <button type="submit">Create Club</button>
-        </form>
+        <div class="input-group">
+          <label for="content">Content</label>
+          <textarea id="content" name="content" placeholder="Write your blog content here" rows="10" required></textarea>
+        </div>
+        <div class="input-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" placeholder="Author" required>
+        </div>
+        <div class="input-group">
+          <label for="image">Upload Image</label>
+          <input type="file" id="image" name="image">
+        </div>
+        <button type="submit" class="submit-btn">Submit Post</button>
+      </form>
     </div>
-</div>
-
+  </section>
+  <link rel="stylesheet" href="{% static 'css/create_blog_post.css' %}">
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+<div class="payment-container">
+    <h2>Book Exchange Payment</h2>
+    <p>You are about to pay <strong>Ksh 200</strong> to exchange the book <strong>{{ book.title }}</strong>.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="pay-btn">Pay Ksh 200</button>
+    </form>
+</div>
+
+<style>
+    .payment-container {
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+        padding: 20px;
+        background: #FFFFFF;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .pay-btn {
+        background-color: #FF8200;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .pay-btn:hover {
+        background-color: #e67300;
+    }
+</style>
+{% endblock %}

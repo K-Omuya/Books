@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Book Club{% endblock %}
+
+{% block content %}
+    <style>
+        /* Color Theme */
+        :root {
+            --deep-blue: #004080; /* Navigation & Headings */
+            --bright-orange: #FF8200; /* Call-to-Action Buttons */
+            --soft-green: #3CB371; /* Highlights & Impact Sections */
+            --dark-gray: #333333; /* Text & Contrast Elements */
+            --light-gray: #F5F5F5; /* Section Backgrounds */
+            --white: #FFFFFF; /* General Background */
+            --glass-bg: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+        }
+
+        /* Book Club Form Container (Scoped to avoid affecting base.html) */
+        .bookclub-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 50px 0;
+        }
+
+        .bookclub-form {
+            width: 45%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bookclub-form h2 {
+            color: var(--deep-blue);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Form Styling */
+        .bookclub-form form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .bookclub-form label {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--dark-gray);
+            text-align: left;
+        }
+
+        .bookclub-form input,
+        .bookclub-form select,
+        .bookclub-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--dark-gray);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border 0.3s ease-in-out;
+        }
+
+        .bookclub-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .bookclub-form input:focus,
+        .bookclub-form select:focus,
+        .bookclub-form textarea:focus {
+            outline: none;
+            border: 2px solid var(--deep-blue);
+            box-shadow: 0px 0px 6px rgba(0, 64, 128, 0.3);
+        }
+
+        /* Submit Button */
+        .bookclub-form .btn {
+            background-color: var(--bright-orange);
+            color: var(--white);
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .bookclub-form .btn:hover {
+            background-color: #e67300; /* Darker shade */
+            transform: scale(1.05);
+        }
+
+        /* Back Link */
+        .bookclub-form .back-link {
+            margin-top: 15px;
+            display: inline-block;
+            color: var(--deep-blue);
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .bookclub-form .back-link:hover {
+            color: var(--soft-green);
+            text-decoration: underline;
+        }
+
+    </style>
+
+    <div class="bookclub-form-container">
+        <div class="bookclub-form">
+            <h2>📖 Create a Book Club</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Create Club</button>
+            </form>
+
+            <a href="{% url 'book_clubs_list' %}" class="back-link">⬅ Back to Book Clubs</a>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,22 +1,40 @@
-from django import forms
-from .models import BlogPost
-from django import forms
+
 from .models import ContactMessage
-from django import forms
-from .models import BookClub
-from django import forms
+
 from .models import BookExchange
 
+
+
+
 from django import forms
-from .models import BookPledge, BookDonation
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
+from django import forms
+from django.contrib.auth.models import User
 
+class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, label="Password")
+    confirm_password = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
 
-class BlogPostForm(forms.ModelForm):
     class Meta:
-        model = BlogPost
-        fields = ['title', 'author', 'content']
+        model = User
+        fields = ['username', 'email', 'password', 'confirm_password']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError("Passwords do not match. Please try again.")
+
+        return cleaned_data
+
+
 
 
 class ContactForm(forms.ModelForm):
@@ -26,36 +44,65 @@ class ContactForm(forms.ModelForm):
 
 
 
+from django import forms
+from .models import BookClub
+
 class BookClubForm(forms.ModelForm):
     class Meta:
         model = BookClub
-        fields = ['school_name', 'county', 'no_of_students', 'patron_name', 'patron_contact']
+        fields = ['school_name', 'county', 'students_count', 'patron_name', 'patron_contact']
 
 
 
-class BookPledgeForm(forms.ModelForm):
+
+
+
+
+
+from django import forms
+from django.apps import apps
+
+class DynamicModelForm(forms.ModelForm):
+    def __init__(self, model, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._meta.model = model
+        self.fields.update(forms.fields_for_model(model))
+
     class Meta:
-        model = BookPledge
-        fields = ['donor_name', 'donor_email', 'pledged_books']
+        model = None  # Placeholder, dynamically set later
+        fields = '__all__'
+
+
+
+from django import forms
+from .models import Blog
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['title', 'content', 'author']
+
+from django import forms
+from .models import BookDonation
 
 
 class BookDonationForm(forms.ModelForm):
     class Meta:
         model = BookDonation
-        fields = ['donor_name', 'donor_email', 'book_title', 'book_image', 'book_type', 'delivery_option']
+        fields = ['donor_name', 'donor_email', 'book_title', 'book_type', 'delivery_option', 'book_image']
+from django import forms
+from .models import PledgedBook
 
-class BookPledgeForm(forms.ModelForm):
+class PledgedBookForm(forms.ModelForm):
     class Meta:
-        model = BookPledge
-        fields = ['donor_name', 'donor_email', 'pledged_books']
+        model = PledgedBook
+        fields = ['donor_name', 'donor_email', 'book_title', 'book_type']
 
 
-class BookDonationForm(forms.ModelForm):
-    class Meta:
-        model = BookDonation
-        fields = ['donor_name', 'donor_email', 'book_title', 'book_image', 'book_type', 'delivery_option']
+from django import forms
+from .models import BookExchange
 
 class BookExchangeForm(forms.ModelForm):
     class Meta:
         model = BookExchange
-        fields = ['donor_name', 'email_or_phone', 'book_title', 'author', 'genre', 'location', 'delivery_option', 'book_image']
+        fields = ['title', 'author', 'genre', 'donor_name', 'contact_details', 'location', 'delivery_option', 'image']

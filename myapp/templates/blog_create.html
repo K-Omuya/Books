@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 50px auto; padding: 30px; background-color: #FFFFFF;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center;">
+
+    <h1 style="color: #004080; margin-bottom: 20px; font-size: 24px; font-weight: bold;">📝 Add a New Blog</h1>
+
+    <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
+        {% csrf_token %}
+
+        <!-- Form Fields -->
+        <div style="text-align: left;">
+            <label for="title" style="font-weight: bold; color: #333333;">Blog Title:</label>
+            <input type="text" name="title" id="title" required
+                   style="width: 100%; padding: 10px; border: 1px solid #ccc;
+                          border-radius: 6px; font-size: 14px;">
+
+            <label for="author" style="font-weight: bold; color: #333333;">Author:</label>
+            <input type="text" name="author" id="author" required
+                   style="width: 100%; padding: 10px; border: 1px solid #ccc;
+                          border-radius: 6px; font-size: 14px;">
+
+            <label for="content" style="font-weight: bold; color: #333333;">Content:</label>
+            <textarea name="content" id="content" rows="6" required
+                      style="width: 100%; padding: 10px; border: 1px solid #ccc;
+                             border-radius: 6px; font-size: 14px; resize: vertical;"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+            style="background-color: #FF8200; color: white; padding: 12px; font-size: 16px;
+                   border: none; border-radius: 6px; cursor: pointer; transition: 0.3s;">
+            🚀 Submit
+        </button>
+    </form>
+
+    <!-- Cancel Button -->
+    <a href="{% url 'blog_list' %}"
+        style="display: inline-block; background-color: #3CB371; color: white;
+               padding: 12px; font-size: 16px; text-decoration: none; border-radius: 6px;
+               margin-top: 15px; display: block; transition: 0.3s;">
+        ❌ Cancel
+    </a>
+</div>
+
+<!-- Hover Effects -->
+<style>
+    button:hover { background-color: #e67300; }
+    a:hover { background-color: #2e8b57; }
+    textarea:focus, input:focus { border-color: #004080; outline: none; box-shadow: 0 0 5px rgba(0, 64, 128, 0.5); }
+</style>
+
+{% endblock %}

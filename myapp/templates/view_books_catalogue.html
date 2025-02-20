@@ -197,8 +197,8 @@ footer {
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Blog</a>
                     <div class="dropdown-content">
-                        <a href="{% url 'create_blog_post' %}">Create Blog Post</a>
-                        <a href="{% url 'view_blog_post' %}">View Blogs</a>
+                        <a href="{% url 'blog_create' %}">Create Blog Post</a>
+                        <a href="{% url 'blog_list' %}">View Blogs</a>
                     </div>
                 </li>
             </ul>
@@ -238,5 +238,3 @@ footer {
 
 
 
-
-{% endblock %}

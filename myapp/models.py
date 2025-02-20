@@ -1,13 +1,22 @@
 from django.db import models
 
-class BlogPost(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=100)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_groups',  # Change related_name to avoid conflicts
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_permissions',  # Change related_name to avoid conflicts
+        blank=True
+    )
 
 
 
@@ -24,88 +33,131 @@ class ContactMessage(models.Model):
 
 
 
-class BookClub(models.Model):
-    SCHOOL_CHOICES = [
-        ('Primary', 'Primary School'),
-        ('Secondary', 'Secondary School'),
-        ('Other', 'Other'),
-    ]
 
+class Impact(models.Model):
+    students_impacted = models.IntegerField()
+    schools_reached = models.IntegerField()
+    exchanges = models.IntegerField()
+    books_donated = models.IntegerField()
+
+    def __str__(self):
+        return f"Impact Data (ID: {self.id})"
+
+from django.db import models
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+from django.db import models
+
+class BookClub(models.Model):
     school_name = models.CharField(max_length=255)
     county = models.CharField(max_length=100)
-    no_of_students = models.PositiveIntegerField()
+    students_count = models.IntegerField()
     patron_name = models.CharField(max_length=255)
-    patron_contact = models.CharField(max_length=50)
+    patron_contact = models.CharField(max_length=15)
 
     def __str__(self):
-        return f"{self.school_name} - {self.county}"
+        return self.school_name
 
 
+from django.db import models
 
-
-
-class BookPledge(models.Model):
-    donor_name = models.CharField(max_length=255)
-    donor_email = models.EmailField()
-    pledged_books = models.TextField()
-    date_pledged = models.DateTimeField(auto_now_add=True)
+class Blog(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.CharField(max_length=100)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.donor_name} - {self.date_pledged.strftime('%Y-%m-%d')}"
+        return self.title
 
+from django.db import models
 
 class BookDonation(models.Model):
-    BOOK_TYPES = [
-        ('curriculum', 'Curriculum Books'),
-        ('storybooks', 'Storybooks'),
-        ('general', 'General Reading Books'),
-    ]
-
-    DELIVERY_OPTIONS = [
-        ('drop_off', 'Drop off at nearest school book club'),
-        ('pickup', 'Request for pickup (if available)'),
-    ]
-
-    donor_name = models.CharField(max_length=255)
+    donor_name = models.CharField(max_length=100)
     donor_email = models.EmailField()
-    book_title = models.CharField(max_length=255)
-    book_image = models.ImageField(upload_to='donated_books/')
-    book_type = models.CharField(max_length=20, choices=BOOK_TYPES)
-    delivery_option = models.CharField(max_length=20, choices=DELIVERY_OPTIONS)
-    date_donated = models.DateTimeField(auto_now_add=True)
+    book_title = models.CharField(max_length=200)
+    book_type = models.CharField(
+        max_length=50,
+        choices=[('curriculum', 'Curriculum'), ('storybook', 'Storybook'), ('general', 'General Reading')]
+    )
+    delivery_option = models.CharField(max_length=200)
+    book_image = models.ImageField(upload_to='book_donations/')
+    donated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.book_title} by {self.donor_name}"
 
 
+from django.db import models
+
+class PledgedBook(models.Model):
+    donor_name = models.CharField(max_length=255)
+    donor_email = models.EmailField()
+    book_title = models.CharField(max_length=255)
+    book_type_choices = [
+        ('curriculum', 'Curriculum'),
+        ('storybook', 'Storybook'),
+        ('general', 'General Reading')
+    ]
+    book_type = models.CharField(max_length=20, choices=book_type_choices)
+    pledge_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.book_title
+
+
+from django.db import models
+
+class Book(models.Model):
+    GENRE_CHOICES = [
+        ('fiction', 'Fiction'),
+        ('non-fiction', 'Non-Fiction'),
+        ('science', 'Science'),
+        ('history', 'History'),
+        ('biography', 'Biography'),
+    ]
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    donor_name = models.CharField(max_length=255)
+    contact = models.CharField(max_length=100)
+    location = models.CharField(max_length=255)
+    delivery_option = models.CharField(max_length=255, choices=[('drop_off', 'Drop Off'), ('personal_pickup', 'Personal Pickup')])
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+from django.db import models
 
 class BookExchange(models.Model):
     GENRE_CHOICES = [
-        ('fiction', 'Fiction'),
-        ('non_fiction', 'Non-Fiction'),
-        ('education', 'Educational'),
-        ('biography', 'Biography'),
-        ('fantasy', 'Fantasy'),
-        ('history', 'History'),
-        ('mystery', 'Mystery'),
-        ('science', 'Science'),
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Sci-Fi', 'Sci-Fi'),
+        ('Romance', 'Romance'),
+        ('Mystery', 'Mystery'),
     ]
 
-    DELIVERY_OPTIONS = [
-        ('drop_off', 'Drop off at location'),
-        ('personal_pickup', 'Personal pick-up'),
-    ]
-
-    donor_name = models.CharField(max_length=255)
-    email_or_phone = models.CharField(max_length=100)
-    book_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    genre = models.CharField(max_length=20, choices=GENRE_CHOICES)
-    location = models.CharField(max_length=100)
-    delivery_option = models.CharField(max_length=20, choices=DELIVERY_OPTIONS)
-    book_image = models.ImageField(upload_to='exchange_books/')
-    date_added = models.DateTimeField(auto_now_add=True)
-    payment_status = models.BooleanField(default=False)
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
+    donor_name = models.CharField(max_length=255)
+    contact_details = models.CharField(max_length=100)  # Email or phone
+    location = models.CharField(max_length=255)  # City or town
+    delivery_option = models.CharField(max_length=100, choices=[('Drop-off', 'Drop-off'), ('Personal Pick-up', 'Personal Pick-up')])
+    image = models.ImageField(upload_to='book_images/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.book_title} by {self.author}"
+        return self.title

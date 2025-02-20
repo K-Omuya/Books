@@ -3,133 +3,116 @@
 {% block title %}Donate a Book{% endblock %}
 
 {% block content %}
-{% load static %}
+    <style>
+/* Ensure styles apply only to donation page */
+.donation-container {
+    max-width: 500px; /* Slightly wider */
+    margin: 40px auto;
+    padding: 25px;
+    background: #f5f5f5; /* Light background */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-<!-- Custom CSS for Donate Book Page -->
-<style>
-    /* Main container */
-    .donate-book-container {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: #F5F5F5;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
+/* Heading */
+.donation-container h2 {
+    color: #004080; /* Deep blue */
+    margin-bottom: 18px;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-    h2 {
-        text-align: center;
-        color: #004080;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
+/* Buttons */
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
 
-    /* Form Styling */
-    form {
-        display: flex;
-        flex-direction: column;
-    }
+.btn {
+    flex: 1; /* Equal button spacing */
+    text-decoration: none;
+    background: #FF8200; /* Bright Orange */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    text-align: center;
+    margin: 0 7px;
+    font-size: 15px;
+}
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+.btn:hover {
+    background: #cc6800;
+}
 
-    .form-group label {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333333;
-    }
+/* Form */
+.donation-form {
+    text-align: left;
+}
 
-    .form-group input, .form-group select {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
+.donation-form label {
+    font-weight: bold;
+    color: #333;
+    font-size: 15px;
+}
 
-    .form-group input[type="file"] {
-        padding: 5px;
-    }
+.donation-form input,
+.donation-form select,
+.donation-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
 
-    button {
-        background-color: #FF8200;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background: #3CB371; /* Soft Green */
+    padding: 12px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border-radius: 6px;
+}
 
-    button:hover {
-        background-color: #cc6800;
-    }
+.submit-btn:hover {
+    background: #2e8b57;
+}
 
-    /* Success Message */
-    .alert-success {
-        background-color: #d4edda;
-        color: #155724;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 20px;
+/* Responsive Design */
+@media (max-width: 600px) {
+    .donation-container {
+        width: 95%;
     }
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
 </style>
 
-<!-- Display success message if any -->
-{% if messages %}
-    <div class="alert alert-success">
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
-{% endif %}
-
-<div class="donate-book-container">
+<div class="donation-container">
     <h2>Donate a Book</h2>
-    <form method="POST" enctype="multipart/form-data">
+
+    <div class="btn-container">
+        <a href="{% url 'pay' %}" class="btn">Donate Money</a>
+        <a href="{% url 'pledge_book' %}" class="btn">Pledge a Book</a>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="donation-form">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="donor_name">Donor Name</label>
-            <input type="text" name="donor_name" id="donor_name" class="form-control" value="{{ form.donor_name.value }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="donor_email">Donor Email</label>
-            <input type="email" name="donor_email" id="donor_email" class="form-control" value="{{ form.donor_email.value }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="book_title">Book Title</label>
-            <input type="text" name="book_title" id="book_title" class="form-control" value="{{ form.book_title.value }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="book_image">Book Image</label>
-            <input type="file" name="book_image" id="book_image" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="book_type">Book Type</label>
-            <select name="book_type" id="book_type" class="form-control" required>
-                <option value="curriculum" {% if form.book_type.value == 'curriculum' %}selected{% endif %}>Curriculum Books</option>
-                <option value="storybooks" {% if form.book_type.value == 'storybooks' %}selected{% endif %}>Storybooks</option>
-                <option value="general" {% if form.book_type.value == 'general' %}selected{% endif %}>General Reading Books</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="delivery_option">Delivery Option</label>
-            <select name="delivery_option" id="delivery_option" class="form-control" required>
-                <option value="drop_off" {% if form.delivery_option.value == 'drop_off' %}selected{% endif %}>Drop off at nearest school book club</option>
-                <option value="pickup" {% if form.delivery_option.value == 'pickup' %}selected{% endif %}>Request for pickup (if available)</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Donate Book</button>
+        {{ form.as_p }}
+        <button type="submit" class="btn submit-btn">Submit Donation</button>
     </form>
 </div>
-
 {% endblock %}

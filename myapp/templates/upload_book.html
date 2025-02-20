@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Book{% endblock %}
+
+{% block content %}
+    <style>
+    /* General Container */
+    .upload-container {
+        max-width: 600px;
+        margin: auto;
+        background-color: #FFFFFF;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 50px;
+    }
+
+    /* Heading */
+    .upload-heading {
+        color: #004080;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Form Fields */
+    .form-group p {
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #3CB371;
+        border-radius: 5px;
+        background-color: #F5F5F5;
+        font-size: 16px;
+        color: #333333;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #FF8200;
+        background-color: #ffffff;
+        box-shadow: 0 0 5px rgba(255, 130, 0, 0.5);
+    }
+
+    /* Styled Textarea */
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+
+    /* Upload Button */
+    .upload-btn {
+        background-color: #FF8200;
+        color: white;
+        padding: 12px;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .upload-btn:hover {
+        background-color: #e67300;
+    }
+</style>
+<div class="upload-container">
+    <h2 class="upload-heading">Upload a Book for Exchange</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}

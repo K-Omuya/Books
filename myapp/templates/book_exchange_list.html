@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Exchange{% endblock %}
+
+{% block content %}
+    <style>
+    /* Book Exchange Container (Avoids affecting base file) */
+    .book-exchange-container {
+        max-width: 1100px;
+        margin: auto;
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .page-title {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 15px;
+    }
+
+    /* Search Bar */
+    .book-exchange-container .search-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .book-exchange-container .search-bar input {
+        flex: 1;
+        padding: 8px;
+        border: 2px solid #3CB371;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .book-exchange-container .search-bar button {
+        background-color: #FF8200;
+        color: white;
+        border: none;
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Upload Button */
+    .book-exchange-container .upload-btn {
+        display: block;
+        width: fit-content;
+        background-color: #004080;
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    /* Books Grid */
+    .book-exchange-container .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    /* Book Card */
+    .book-exchange-container .book-card {
+        background-color: #F5F5F5;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Book Content */
+    .book-exchange-container .book-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Book Image */
+    .book-exchange-container .book-image img {
+        width: 120px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    /* Book Details */
+    .book-exchange-container .book-details h4 {
+        margin: 8px 0 5px;
+        font-size: 14px;
+        color: #004080;
+    }
+
+    .book-exchange-container .book-author {
+        font-size: 12px;
+        color: #333;
+    }
+
+    .book-exchange-container .book-genre,
+    .book-exchange-container .book-location {
+        font-size: 12px;
+        margin: 2px 0;
+        color: #555;
+    }
+
+    /* Exchange Button */
+    .book-exchange-container .exchange-btn {
+        display: block;
+        background-color: #3CB371;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 6px;
+        transition: background 0.3s;
+    }
+
+    .book-exchange-container .exchange-btn:hover {
+        background-color: #2e8b57;
+    }
+
+    /* No Books Message */
+    .book-exchange-container .no-books {
+        text-align: center;
+        color: #333;
+        font-size: 14px;
+    }
+</style>
+<div class="book-exchange-container">
+    <h2 class="page-title">Find & Exchange Books</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'book_exchange_list' %}" class="search-bar">
+        <input type="text" name="q" placeholder="Search books...">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Upload Button -->
+    <a href="{% url 'upload_book' %}" class="upload-btn">Upload a Book</a>
+
+    <!-- Books Grid -->
+    <div class="books-grid">
+        {% for book in books %}
+        <div class="book-card">
+            <div class="book-content">
+                <!-- Book Image -->
+                <div class="book-image">
+                    {% if book.image %}
+                        <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120x160" alt="No Image">
+                    {% endif %}
+                </div>
+                <!-- Book Details -->
+                <div class="book-details">
+                    <h4>{{ book.title }}</h4>
+                    <p class="book-author">{{ book.author }}</p>
+                    <p class="book-genre"><strong>Genre:</strong> {{ book.genre }}</p>
+                    <p class="book-location">📍 {{ book.location }}</p>
+                    <a href="{% url 'book_payment' book.id %}" class="exchange-btn">Exchange</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="no-books">No books available for exchange.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}

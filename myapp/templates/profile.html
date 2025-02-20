@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<style>
+    /* Main Container */
+    .profile-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #F5F5F5;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Heading Styling */
+    .profile-container h2 {
+        color: #004080;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Paragraph Styling */
+    .profile-container p {
+        color: #333333;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Profile Details */
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .profile-details .detail {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        color: #777777;
+    }
+
+    .profile-details .detail span {
+        color: #004080;
+        font-weight: bold;
+    }
+
+    /* Button Styling */
+    .edit-profile-button {
+        display: inline-block;
+        background-color: #FF8200;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-top: 30px;
+        transition: background-color 0.3s ease;
+    }
+
+    .edit-profile-button:hover {
+        background-color: #cc6800;
+    }
+</style>
+
+<div class="profile-container">
+    <h2>Welcome to your profile, {{ user.username }}!</h2>
+    <p>This is your user profile page.</p>
+
+    <div class="profile-details">
+        <div class="detail"><span>Email:</span> {{ user.email }}</div>
+        <div class="detail"><span>First Name:</span> {{ user.first_name }}</div>
+        <div class="detail"><span>Last Name:</span> {{ user.last_name }}</div>
+        <div class="detail"><span>Join Date:</span> {{ user.date_joined|date:"F j, Y" }}</div>
+    </div>
+
+    <a href="{% url 'edit_profile' %}" class="edit-profile-button">Edit Profile</a>
+</div>
+
+{% endblock %}

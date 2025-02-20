@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}View Pledged Books{% endblock %}
+
+{% block content %}
+    <style>
+    .pledged-books-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #F5F5F5; /* Light Gray */
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.book-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+    border-left: 5px solid #FF8200; /* Orange Accent */
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+    border-left: 5px solid #004080; /* Deep Blue on hover */
+}
+
+h2 {
+    color: #004080;
+    margin-bottom: 10px;
+    font-size: 26px;
+}
+
+h3 {
+    color: #FF8200;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #333333;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.no-books {
+    color: #FF8200;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+    </style>
+<div class="pledged-books-container">
+    <h2>Pledged Books</h2>
+
+    <div class="book-list">
+        {% for book in pledged_books %}
+        <div class="book-card">
+            <h3>{{ book.book_title }}</h3>
+            <p><strong>Type:</strong> {{ book.get_book_type_display }}</p>
+            <p><strong>Donor:</strong> {{ book.donor_name }} ({{ book.donor_email }})</p>
+            <p><strong>Pledged on:</strong> {{ book.pledge_date|date:"M d, Y" }}</p>
+        </div>
+        {% empty %}
+        <p>No books pledged yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
