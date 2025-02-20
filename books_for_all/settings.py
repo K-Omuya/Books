@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,6 +80,7 @@ STATICFILES_DIRS = [
 
 
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
@@ -93,6 +95,7 @@ WSGI_APPLICATION = 'books_for_all.wsgi.application'
 
 
 
+ALLOWED_HOSTS = ['your-app-name.onrender.com']
 
 
 # Database
