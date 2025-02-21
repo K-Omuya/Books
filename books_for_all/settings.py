@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'books_for_all.wsgi.application'
 
 
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Database
