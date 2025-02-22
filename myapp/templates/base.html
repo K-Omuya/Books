@@ -6,156 +6,239 @@
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     <style>
-        .navbar {
-            background-color: #004080;
-            color: white;
-            padding: 1rem;
+        :root {
+            --deep-blue: #004080;
+            --bright-orange: #a59d95;
+            --soft-green: #3CB371;
+            --dark-gray: #333333;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
         }
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .logo img {
-            padding: 10px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-        .navbar .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-        .navbar .nav-links li {
-            margin: 0 1rem;
-            position: relative;
-        }
-        .navbar .nav-links li a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            display: inline-block;
-        }
-        .dropdown {
-            position: relative;
-        }
-        .dropdown .dropbtn {
-            background-color: transparent;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #4f63b1;
-            min-width: 180px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            top: 100%;
-            left: 0;
-            border-radius: 5px;
-        }
-        .dropdown-content a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #004080;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
+            background-color: var(--light-gray);
         }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--deep-blue);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 39px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            font-size: 16px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: var(--deep-blue);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--deep-blue);
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Content */
+        .content {
+            padding: 20px;
+        }
+
+        /* Footer */
         .footer {
-            background-color: #004080;
+            background-color: var(--deep-blue);
             color: white;
             padding: 15px;
-            width: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
-            bottom: 0;
+            flex-wrap: wrap;
         }
+
         .footer div {
             text-align: center;
+            flex: 1;
         }
+
         .footer a {
-            color: #FF8200;
+            color: var(--bright-orange);
             text-decoration: none;
+        }
+
+        .social-icons img {
+            width: 25px;
+            margin: 0 5px;
+        }
+
+        /* Admin Button (At the End) */
+        .admin-button {
+            margin-left: auto;
+            padding: 10px 15px;
+            {#background: var(--bright-orange);#}
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .admin-button:hover {
+            background: #e67300;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .admin-button {
+                margin: 10px auto 0;
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="container">
+        <button class="menu-toggle">☰</button>
+        <div class="logo-container">
             <div class="logo">
                 <img src="{% static 'logo.jpg' %}" alt="Books for All">
             </div>
-            <h1>Books for All</h1>
-            <ul class="nav-links">
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'about_contact' %}">About Us</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Club</a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'add_book_club' %}">Create Book Club</a>
-                        <a href="{% url 'book_clubs_list' %}">View Book Clubs</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Books</a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'view_donated_books' %}">Donated Books</a>
-                        <a href="{% url 'book_exchange_list' %}">Book Catalogue</a>
-                        <a href="{% url 'view_pledged_books' %}">Pledged Books</a>
-                    </div>
-
-                <li><a href="{% url 'blog_list' %}">Blogs</a></li>
-            </ul>
+            <div class="logo-text">Books for All</div>
         </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about_contact' %}">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Club</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'add_book_club' %}">Create Book Club</a>
+                    <a href="{% url 'book_clubs_list' %}">View Book Clubs</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Books</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'view_donated_books' %}">Donated Books</a>
+                    <a href="{% url 'book_exchange_list' %}">Book Catalogue</a>
+                    <a href="{% url 'view_pledged_books' %}">Pledged Books</a>
+                </div>
+            </li>
+            <li><a href="{% url 'blog_list' %}">Blogs</a></li>
+        </ul>
     </nav>
+
     <div class="content">
         {% block content %}
         {% endblock %}
     </div>
+
     <footer class="footer">
         <div>
             <h3>📞 Contact Us</h3>
             <p>Email: <a href="mailto:Bookforall@prc.cx">Bookforall@prc.cx</a></p>
             <p>Phone: <a href="tel:+254703128764">+254 703 128764</a></p>
         </div>
-        <div>
-            <a href="{% url 'admin:index' %}" class="btn btn-primary">Go to Admin</a>
-        </div>
-        <div>
+        <div class="social-icons">
             <h3>📲 Follow Us</h3>
-            <a href="https://x.com/Bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670151.png" alt="Twitter (X)" width="25"></a>
-            <a href="https://instagram.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="25"></a>
-            <a href="https://facebook.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="25"></a>
-            <a href="https://linkedin.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" width="25"></a>
-            <a href="https://wa.me/254743688354?text=I%20saw%20your%20work%20amazing%20and%20am%20interested" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="25"></a>
+            <a href="https://x.com/Bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670151.png" alt="Twitter (X)"></a>
+            <a href="https://instagram.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+            <a href="https://facebook.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+            <a href="https://linkedin.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"></a>
+            <a href="https://wa.me/254743688354?text=I%20saw%20your%20work%20amazing%20and%20am%20interested" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp"></a>
         </div>
+        <a href="{% url 'admin:index' %}" class="admin-button">Go to Admin</a>
     </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+    </script>
+
 </body>
 </html>
