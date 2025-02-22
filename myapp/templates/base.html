@@ -125,50 +125,79 @@
         .content {
             padding: 20px;
         }
+/* Footer */
+.footer {
+    background-color: var(--deep-blue);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds spacing between divs */
+    text-align: center;
+}
 
-        /* Footer */
-        .footer {
-            background-color: var(--deep-blue);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+.footer div {
+    flex: 1;
+    margin: 10px 0;
+}
 
-        .footer div {
-            text-align: center;
-            flex: 1;
-        }
+.footer a {
+    color: var(--bright-orange);
+    text-decoration: none;
+    font-size: 16px;
+}
 
-        .footer a {
-            color: var(--bright-orange);
-            text-decoration: none;
-        }
+.social-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px; /* More spacing for tapability */
+}
 
-        .social-icons img {
-            width: 25px;
-            margin: 0 5px;
-        }
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
 
-        /* Admin Button (At the End) */
-        .admin-button {
-            margin-left: auto;
-            padding: 10px 15px;
-            {#background: var(--bright-orange);#}
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+/* Admin Button */
+.admin-button {
+    padding: 12px 20px;
+    background: var(--bright-orange);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+    margin: 10px auto;
+}
 
-        .admin-button:hover {
-            background: #e67300;
-        }
+.admin-button:hover {
+    background: #e67300;
+}
 
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 25px; /* Increased spacing for better touch experience */
+        padding: 25px;
+    }
 
+    .social-icons img {
+        width: 35px; /* Larger icons for easier clicking */
+        height: 35px;
+    }
+
+    .admin-button {
+        width: 80%; /* Makes it easier to tap */
+        text-align: center;
+        font-size: 18px;
+    }
+}
 
 /* Mobile View */
 @media (max-width: 768px) {
