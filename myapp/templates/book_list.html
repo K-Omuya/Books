@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+    <style>
+    /* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .bookclub-form {
+        width: 95%;
+        padding: 15px;
+    }
+    .navbar .container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar .nav-links {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar .nav-links li {
+            display: block;
+            margin: 0.5rem 0;
+        }}
+    </style>
 <h2>Books</h2>
 <a href="{% url 'book_create' %}">➕ Add Book</a>
 <table>

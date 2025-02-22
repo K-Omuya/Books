@@ -91,16 +91,26 @@
     background: #b56509;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .donation-container {
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .bookclub-form {
         width: 95%;
+        padding: 15px;
     }
-    .btn {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-}
+    .navbar .container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar .nav-links {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar .nav-links li {
+            display: block;
+            margin: 0.5rem 0;
+        }}
 </style>
 
 <div class="donation-container">
