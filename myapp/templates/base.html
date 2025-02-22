@@ -168,16 +168,27 @@
             background: #e67300;
         }
 
-        @media (max-width: 768px) {
-            .footer {
-                flex-direction: column;
-                text-align: center;
-            }
-            .admin-button {
-                margin: 10px auto 0;
-                display: block;
-            }
-        }
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 25px; /* Increased spacing for better touch experience */
+        padding: 25px;
+    }
+
+    .social-icons img {
+        width: 35px; /* Larger icons for easier clicking */
+        height: 35px;
+    }
+
+    .admin-button {
+        width: 80%; /* Makes it easier to tap */
+        text-align: center;
+        font-size: 18px;
+    }
+}
+
     </style>
 </head>
 <body>
