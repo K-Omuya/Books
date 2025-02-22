@@ -169,23 +169,53 @@
         }
 
 
-/* Mobile Adjustments */
+
+/* Mobile View */
 @media (max-width: 768px) {
-    .footer {
-        flex-direction: column;
-        gap: 25px; /* Increased spacing for better touch experience */
-        padding: 25px;
+    .nav-links {
+        display: none;
     }
 
-    .social-icons img {
-        width: 35px; /* Larger icons for easier clicking */
-        height: 35px;
+    .menu-toggle {
+        display: block;
     }
 
-    .admin-button {
-        width: 80%; /* Makes it easier to tap */
-        text-align: center;
-        font-size: 18px;
+    .navbar .sidebar {
+        left: -260px;
+    }
+
+    .navbar .sidebar.open {
+        left: 0;
+    }
+
+    .dropdown-content {
+        position: relative;
+        left: 20px;
+        top: 5px;
+    }
+}
+/* Mobile View */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar .sidebar {
+        left: -260px;
+    }
+
+    .navbar .sidebar.open {
+        left: 0;
+    }
+
+    .dropdown-content {
+        position: relative;
+        left: 20px;
+        top: 5px;
     }
 }
 
@@ -249,7 +279,19 @@
         document.querySelector('.menu-toggle').addEventListener('click', function () {
             document.querySelector('.nav-links').classList.toggle('show');
         });
-    </script>
+
+function toggleMenu() {
+    var sidebar = document.getElementById("mobileSidebar");
+    sidebar.classList.toggle("open");
+    document.body.classList.toggle("menu-open");
+}
+
+function toggleSubmenu(submenuId) {
+    var submenu = document.getElementById(submenuId);
+    submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+}
+</script>
+
 
 </body>
 </html>
