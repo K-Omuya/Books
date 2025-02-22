@@ -89,6 +89,7 @@
                 {% for club in clubs %}
                     <div class="bookclub-card">
                         <h4>{{ club.name }}</h4>
+                        <p><strong>✍️ Name:</strong> {{ club.school_name }}</p>
                         <p><strong>📖 Students:</strong> {{ club.students_count }}</p>
                         <p><strong>👨‍🏫 Patron:</strong> {{ club.patron }} ({{ club.patron_contact }})</p>
                     </div>

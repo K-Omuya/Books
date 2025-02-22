@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <title>Login</title>
     <style>
         body {
+            background: url("{% static 'background.jpg' %}") no-repeat center center/cover;
             background-color: #FFFFFF;
             display: flex;
             justify-content: center;
@@ -97,7 +99,9 @@
 <body>
 
     <div class="container">
-        <h2>Login</h2>
+    <h2>Books for All</h2>
+
+        <h2>Login </h2>
         <p>Enter your credentials to continue</p>
 
         <!-- Display Django messages -->
@@ -122,7 +126,9 @@
 
             <button type="submit" class="btn">Login</button>
 
-            <a href="{% url 'register' %}" class="sign-in">Don't have an account? Register</a>
+             <p class="link">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+
+
         </form>
     </div>
 

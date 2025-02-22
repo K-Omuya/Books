@@ -203,29 +203,40 @@ body {
 .view-all a:hover {
     color: #FF8200;
 }
-
-/* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
+    .banner {
+        min-height: 60vh;
+        padding: 20px;
+    }
+
     .banner h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-bottom: 15px;
     }
 
     .banner .buttons {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
 
-    .impact-cards,
+    .impact-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr; /* Make it single-column on mobile */
+    }
+
     .blogs {
         grid-template-columns: 1fr;
     }
 
-    .impact-cards .card,
-    .blogs .blog-card {
+    .blog-card, .impact-item {
         padding: 15px;
     }
 }
+
 </style>
 
 <!-- Header Section -->

@@ -7,50 +7,47 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <style>
-        /* General Navbar Styles */
         .navbar {
-            background-color: #004080; /* Deep Blue navigation */
+            background-color: #004080;
             color: white;
             padding: 1rem;
-            text-align: center;
         }
-
         .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
-
-        .navbar .logo {
-            flex: 1;
-            color: #FFFFFF;
-            font-size: 2rem;
+        .logo img {
+            padding: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
         }
-
         .navbar .nav-links {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: flex-end;
-            flex: 2;
+            align-items: center;
         }
-
         .navbar .nav-links li {
             margin: 0 1rem;
-            position: relative; /* For dropdown */
+            position: relative;
         }
-
         .navbar .nav-links li a {
             color: white;
             text-decoration: none;
             padding: 0.5rem 1rem;
+            display: inline-block;
         }
-
-        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
         .dropdown .dropbtn {
-            background-color: #004080;
+            background-color: transparent;
             color: white;
             border: none;
             cursor: pointer;
@@ -58,206 +55,107 @@
             text-decoration: none;
             display: inline-block;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #4f63b1;
-            min-width: 160px;
+            min-width: 180px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             z-index: 1;
             top: 100%;
             left: 0;
+            border-radius: 5px;
         }
-
         .dropdown-content a {
-            color: black;
+            color: white;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
-
         .dropdown-content a:hover {
             background-color: #004080;
         }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
         * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 40px 20px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-section {
-  flex: 1;
-  margin: 10px;
-}
-
-.footer-section h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.footer-section ul {
-  list-style-type: none;
-}
-
-.footer-section ul li {
-  margin: 5px 0;
-}
-
-.footer-section ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-  color: #FF8200;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid #444;
-  padding-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-section {
-    margin: 20px 0;
-  }
-
-  .footer-bottom p {
-    font-size: 0.9rem;
-  }
-}
-
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar .nav-links {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar .nav-links li {
-                display: block;
-                margin: 0.5rem 0;
-            }
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .footer {
+            background-color: #004080;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            bottom: 0;
+        }
+        .footer div {
+            text-align: center;
+        }
+        .footer a {
+            color: #FF8200;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">Book for Donation </h1>
+            <div class="logo">
+                <img src="{% static 'logo.jpg' %}" alt="Books for All">
+            </div>
+            <h1>Books for All</h1>
             <ul class="nav-links">
-                <li><a href="{% url 'admin:index' %}" class="btn btn-primary">Go to Admin</a></li>
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about_contact' %}">About Us</a></li>
-
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Club</a>
                     <div class="dropdown-content">
                         <a href="{% url 'add_book_club' %}">Create Book Club</a>
                         <a href="{% url 'book_clubs_list' %}">View Book Clubs</a>
                     </div>
-
-                </li><li class="dropdown">
+                </li>
+                <li class="dropdown">
                     <a href="#" class="dropbtn">Books</a>
                     <div class="dropdown-content">
-                        <a href="{% url 'view_donated_books' %}">Donated  Books</a>
+                        <a href="{% url 'view_donated_books' %}">Donated Books</a>
                         <a href="{% url 'book_exchange_list' %}">Book Catalogue</a>
                         <a href="{% url 'view_pledged_books' %}">Pledged Books</a>
                     </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Blog</a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'blog_create' %}">Create Blog Post</a>
-                        <a href="{% url 'blog_list' %}">View Blogs</a>
-                    </div>
-                </li>
+
+                <li><a href="{% url 'blog_list' %}">Blogs</a></li>
             </ul>
         </div>
     </nav>
-
     <div class="content">
         {% block content %}
         {% endblock %}
     </div>
-
-   <footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h3>About Us</h3>
-      <p>Learn more about our mission and values.</p>
-    </div>
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-        <ul>
-    <li><a href="{% url 'index' %}">Home</a></li>
-    <li><a href="{% url 'about_contact' %}">About</a></li>
-    <li><a href="{% url 'about_contact' %}">Contact</a></li>
-</ul>
-
-    </div>
-    <div class="footer-section">
-      <h3>Contact</h3>
-      <p>Email: booksfordonation@gmail.com
-</p>
-      <p>Phone: +254743 688354</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2025 Your Company. All rights reserved.</p>
-  </div>
-</footer>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var dropdowns = document.querySelectorAll('.dropdown');
-
-            dropdowns.forEach(function(dropdown) {
-                var dropbtn = dropdown.querySelector('.dropbtn');
-                var dropdownContent = dropdown.querySelector('.dropdown-content');
-
-                dropbtn.addEventListener('click', function() {
-                    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-                });
-
-                document.addEventListener('click', function(event) {
-                    if (!dropdown.contains(event.target)) {
-                        dropdownContent.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+    <footer class="footer">
+        <div>
+            <h3>📞 Contact Us</h3>
+            <p>Email: <a href="mailto:Bookforall@prc.cx">Bookforall@prc.cx</a></p>
+            <p>Phone: <a href="tel:+254703128764">+254 703 128764</a></p>
+        </div>
+        <div>
+            <a href="{% url 'admin:index' %}" class="btn btn-primary">Go to Admin</a>
+        </div>
+        <div>
+            <h3>📲 Follow Us</h3>
+            <a href="https://x.com/Bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670151.png" alt="Twitter (X)" width="25"></a>
+            <a href="https://instagram.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="25"></a>
+            <a href="https://facebook.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="25"></a>
+            <a href="https://linkedin.com/bookforall20" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" width="25"></a>
+            <a href="https://wa.me/254743688354?text=I%20saw%20your%20work%20amazing%20and%20am%20interested" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="25"></a>
+        </div>
+    </footer>
 </body>
 </html>

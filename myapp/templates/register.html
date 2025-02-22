@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <title>Register</title>
     <style>
         body {
+           background: url("{% static 'background.jpg' %}") no-repeat center center/cover;
             background-color: #FFFFFF;
             display: flex;
             justify-content: center;
@@ -79,6 +81,7 @@
 <body>
 
     <div class="container">
+    <h2>Books For All</h2>
         <h2>Register</h2>
         <p>Create your account</p>
 
