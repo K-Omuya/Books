@@ -88,7 +88,9 @@
     </style>
 
     <div class="bookclub-container">
-        <h2>📚 Book Clubs by County</h2>
+        <h2>📚 Book Clubs by County
+
+        <a href="{% url 'add_book_club' %}" class="bookclub-btn">➕ Add a Book Club</a>
 
         {% for county, clubs in clubs_by_county.items %}
             <h3>📍 {{ county }}</h3>
@@ -106,6 +108,5 @@
             <p>No book clubs available.</p>
         {% endfor %}
 
-        <a href="{% url 'add_book_club' %}" class="bookclub-btn">➕ Add a Book Club</a>
     </div>
 {% endblock %}
