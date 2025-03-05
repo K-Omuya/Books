@@ -134,6 +134,11 @@ from .forms import BookExchangeForm
 from .models import BookExchange
 
 
+from django.http import HttpResponse
+
+def health_check(request):
+    return HttpResponse("OK", content_type="text/plain")
+
 def upload_book_exchange(request):
     if request.method == "POST":
         form = BookExchangeForm(request.POST, request.FILES)

@@ -12,6 +12,8 @@ urlpatterns = [
     path('testimonial/', views.testimonial, name='testimonial'),
     path('contact/', views.contact, name='contact'),
 
+    path('healthz', views.health_check),
+
     path('view_pledged_books/', views.view_pledged_books, name='view_pledged_books'),
     # path('books_for_all/', views.books_for_all, name='books_for_all'),
     path('view_donated_books/', views.view_donated_books, name='view_donated_books'),
