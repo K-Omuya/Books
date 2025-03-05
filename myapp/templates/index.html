@@ -1,0 +1,708 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Books_for_All</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid header-top">
+        <div class="nav-shaps-2"></div>
+        <div class="container d-flex align-items-center">
+            <div class="d-flex align-items-center h-100">
+                <a href="#" class="navbar-brand" style="height: 125px;">
+                    <h1 class="text-primary mb-0"><i class="fa fa-book-open text-primary me-2""></i> Books_for_All</h1>
+                </a>
+            </div>
+            <div class="w-100 h-100">
+                <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
+                    <div class="row gx-0 align-items-center">
+                        <div class="col-lg-8 text-center text-lg-center mb-lg-0">
+                            <div class="d-flex flex-wrap">
+                                <div class="pe-4">
+                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>Bookforall@prc.cx</a>
+                                </div>
+                                <div class="pe-0">
+                                    <a href="#" class="text-muted small"><i class="fa fa-clock text-primary me-2"></i>Mon - Sat: 8.00 am-7.00 pm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end">
+                            <div class="d-flex justify-content-end">
+                                <div class="d-flex align-items-center small">
+                                </div>
+                                <div class="d-flex pe-3">
+                                    <a class="btn p-0 text-primary me-3" href="https://facebook.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-3" href="https://x.com/Bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-3" href="https://instagram.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-0" href="https://linkedin.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
+                    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
+                        <a href="#" class="navbar-brand-2">
+                            <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="fa fa-bars"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <div class="navbar-nav mx-0 mx-lg-auto">
+                                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'upload_book_exchange' %}" class="dropdown-item">Upload Book</a>
+                                        <a href="{% url 'book_exchange_catalogue' %}" class="dropdown-item">Book Catalogue</a>
+                                        <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                        <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
+                                    </div>
+                                </div>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                        <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                        <a href="{% url 'donate_book' %}" class="dropdown-item">Donate book</a>
+                                    </div>
+                                </div>
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                        <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                    </div>
+                                </div>
+                                <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
+                                        <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
+                                        <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
+                                        <a href="{% url 'testimonial' %}" class="dropdown-item">404 Page</a>
+                                    </div>
+                                </div>
+                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                                <div class="nav-btn ps-3">
+                                    <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"> <span>Get Quote</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center bg-primary">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="btn bg-light border nput-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+
+        <!-- Carousel Start -->
+        <div class="header-carousel owl-carousel overflow-hidden bg-dark">
+            <div class="header-carousel-item hero-section">
+                <div class="hero-bg-half-1"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-lg-7 animated fadeInLeft">
+                                <div class="text-sm-center text-md-start">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">Wellcome to Books for All</h4>
+                                    <h1 class="display-1 text-white mb-4">Books for All is now in your city</h1>
+                                    <p class="mb-5 fs-5">Explore a world of knowledge with our vast collection of books. Whether you love fiction, history, or self-improvement, we have something for everyone. Start your reading journey today!</p>
+                                    <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                        <a class="btn btn-dark py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> <span>Watch Video</span></a>
+                                        <a class="btn btn-primary py-3 px-4 px-md-5 ms-2" href="#"><span>Learn More</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-carousel-item hero-section">
+                <div class="hero-bg-half-2"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-lg-7 animated fadeInLeft">
+                                <div class="text-sm-center text-md-start">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">Wellcome to our fitness Center</h4>
+                                    <h1 class="display-2 text-white mb-4">Stay updated and Expand Your Mind by reading from our store</h1>
+                                     <p class="mb-5 fs-5"> Discover a treasure trove of books for every reader. From timeless classics to modern bestsellers, we bring knowledge and stories closer to you. Start your reading adventure today!</p>
+                                    <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                        <a class="btn btn-dark py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> <span>Watch Video</span></a>
+                                        <a class="btn btn-primary py-3 px-4 px-md-5 ms-2" href="#"><span>Learn More</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+        <!-- About Start -->
+        <div class="container-fluid about pt-5">
+            <div class="container pt-5">
+                <div class="row g-5">
+                    <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="about-content h-100">
+                            <h4 class="text-primary">About Books for All</h4>
+                           <h1 class="display-4 text-white mb-4">Unlock Your Potential with the Power of Books</h1>
+                            <p class="mb-4">Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure, Books for All brings stories and wisdom right to your fingertips.</p>
+                             <div class="tab-class pb-4">
+                                <ul class="nav d-flex mb-2">
+                                    <li class="nav-item mb-3">
+                                        <a class="d-flex py-2 active" data-bs-toggle="pill" href="#tab-1">
+                                            <span style="width: 150px;">Our Mission</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="d-flex py-2 mx-3" data-bs-toggle="pill" href="#tab-2">
+                                            <span style="width: 150px;">Our Vision</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="d-flex py-2" data-bs-toggle="pill" href="#tab-3">
+                                            <span style="width: 150px;">Our Goal</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center border-top border-bottom py-4">
+                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
+                                                    <p class="mb-0">To bridge the educational inequality by ensuring evry student has access to books through donations and exchanges, fostering a culture of learning and knoweldeg sharing. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane fade show p-0">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center border-top border-bottom py-4">
+                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
+                                                    <p class="mb-0">A future where no child lacks books and education is accessible to all.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-3" class="tab-pane fade show p-0">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center border-top border-bottom py-4">
+                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
+                                                    <p class="mb-0">Our goal is to make books accessible to everyone, fostering a culture of reading and learning. We believe in empowering minds, sparking creativity, and building a brighter future through the power of books.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4 align-items-center">
+                                <div class="col-sm-6">
+                                    <a href="#" class="btn btn-primary py-3 px-5"> <span>Make Appointment</span></a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex flex-shrink-0 ps-4">
+                                        <a href="#" class="btn btn-light btn-lg-square position-relative wow tada" data-wow-delay=".9s">
+                                            <i class="fa fa-phone-alt fa-2x"></i>
+                                            <div class="position-absolute" style="top: 5px; right: 5px;">
+                                                <span><i class="fa fa-comment-dots text-dark"></i></span>
+                                            </div>
+                                        </a>
+                                        <div class="d-flex flex-column ms-3">
+                                            <span>Call to Our Experts</span>
+                                            <a href="tel:+ 0123 456 7890"><span class="text-white">Free: +254 743 688354</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="about-img h-100">
+                            <div class="about-img-inner d-flex h-100">
+                                <img src="img/about-2.png" class="img-fluid w-100" style="object-fit: cover;" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+                <!-- Features Start -->
+        <div class="container-fluid feature bg-light py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Why Choose Us?</h4>
+                    <h1 class="display-4 mb-4">Discover Our Key Features</h1>
+                    <p class="mb-0">Books for All is committed to promoting literacy, education, and access to books for everyone. Whether you're donating books to help others, exchanging books to discover new stories, or searching for learning resources, we make it easy and impactful.</p>
+                </div>
+                <div class="feature-carousel owl-carousel">
+                    <div class="feature-item wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="feature-img">
+                            <img src="img/feature-1.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="feature-content p-4">
+                            <h4 class="mb-3">Donate Books with Ease</h4>
+                            <p class="mb-4">Contribute to education by donating books to those in need. Your generosity helps create a world where knowledge is accessible to all.</p>
+                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                        </div>
+                    </div>
+                    <div class="feature-item wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="feature-img">
+                            <img src="img/feature-2.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="feature-content p-4">
+                            <h4 class="mb-3">Exchange Books</h4>
+                            <p class="mb-4">Find and swap books with fellow readers. Get access to new titles while giving others a chance to enjoy your pre-loved books.</p>
+                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                        </div>
+                    </div>
+                    <div class="feature-item wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="feature-img">
+                            <img src="img/feature-3.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="feature-content p-4">
+                            <h4 class="mb-3">Access Free Learning Materials</h4>
+                            <p class="mb-4">Browse a wide selection of free educational materials, including textbooks, novels, and reference guides, for all age groups.</p>
+                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-img">
+                            <img src="img/feature-4.jpg" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="feature-content p-4">
+                            <h4 class="mb-3">Support Literacy Campaigns</h4>
+                            <p class="mb-4">Join our mission to promote literacy by participating in community book drives, reading programs, and awareness initiatives.</p>
+                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-shaps"></div>
+            </div>
+        </div>
+        <!-- Features End -->
+
+
+<!-- Books for All - Stories Section Start -->
+<div class="container-fluid blog py-5" style="background-color: #f9f9f9;">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary" style="font-weight: bold;">Books for All</h4>
+            <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Empowering Communities Through Books</h1>
+            <p class="mb-0" style="font-size: 1.2rem; color: #333;">Join us in fostering a culture of reading and knowledge-sharing. Explore stories of book donations, literacy empowerment, and the transformative impact of reading.</p>
+        </div>
+        <div class="blog-carousel owl-carousel">
+            <div class="blog-item wow fadeInUp" data-wow-delay="0.2s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                <div class="blog-img p-4 pb-0" style="background-color: #ffffff;">
+                    <a href="#">
+                        <img src="img/books-for-all-1.jpg" class="img-fluid w-100" alt="Community Book Drive" style="border-radius: 10px;">
+                    </a>
+                </div>
+                <div class="blog-content p-4" style="background-color: #fff; border-radius: 10px;">
+                    <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4" style="border-bottom: 2px solid #eee;">
+                        <div class="small" style="color: #555;"><span class="fa fa-user text-primary me-2"></span> Emily T.</div>
+                        <div class="small" style="color: #555;"><span class="fa fa-calendar text-primary me-2"></span> 20 Feb 2025</div>
+                    </div>
+                    <a href="#" class="h4 d-inline-block mb-3" style="color: #004080; font-weight: 600;">Spreading Knowledge Through Book Drives</a>
+                    <p class="mb-3" style="color: #666;">Discover how book donation drives are making a difference in schools and communities, providing access to knowledge for all.</p>
+                    <a href="#" class="btn btn-primary py-2 px-4"> <span class="me-2">Read More</span> <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item wow fadeInUp" data-wow-delay="0.4s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                <div class="blog-img p-4 pb-0" style="background-color: #ffffff;">
+                    <a href="#">
+                        <img src="img/books-for-all-2.jpg" class="img-fluid w-100" alt="Children Reading Together" style="border-radius: 10px;">
+                    </a>
+                </div>
+                <div class="blog-content p-4" style="background-color: #fff; border-radius: 10px;">
+                    <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4" style="border-bottom: 2px solid #eee;">
+                        <div class="small" style="color: #555;"><span class="fa fa-user text-primary me-2"></span> Liam N.</div>
+                        <div class="small" style="color: #555;"><span class="fa fa-calendar text-primary me-2"></span> 10 Jan 2025</div>
+                    </div>
+                    <a href="#" class="h4 d-inline-block mb-3" style="color: #004080; font-weight: 600;">Inspiring Young Minds with Books</a>
+                    <p class="mb-3" style="color: #666;">Read about the impact of book donations on children’s education and their growing love for reading.</p>
+                    <a href="#" class="btn btn-primary py-2 px-4"> <span class="me-2">Read More</span> <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item wow fadeInUp" data-wow-delay="0.6s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                <div class="blog-img p-4 pb-0" style="background-color: #ffffff;">
+                    <a href="#">
+                        <img src="img/books-for-all-3.jpg" class="img-fluid w-100" alt="Library Initiative" style="border-radius: 10px;">
+                    </a>
+                </div>
+                <div class="blog-content p-4" style="background-color: #fff; border-radius: 10px;">
+                    <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4" style="border-bottom: 2px solid #eee;">
+                        <div class="small" style="color: #555;"><span class="fa fa-user text-primary me-2"></span> Noah S.</div>
+                        <div class="small" style="color: #555;"><span class="fa fa-calendar text-primary me-2"></span> 5 Dec 2024</div>
+                    </div>
+                    <a href="#" class="h4 d-inline-block mb-3" style="color: #004080; font-weight: 600;">Creating Libraries for Underserved Areas</a>
+                    <p class="mb-3" style="color: #666;">See how book donations are helping build libraries, making education more accessible to everyone.</p>
+                    <a href="#" class="btn btn-primary py-2 px-4"> <span class="me-2">Read More</span> <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Books for All - Stories Section End -->
+
+       <!-- Blog Start -->
+        <div class="container-fluid blog py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Our Stories</h4>
+                    <h1 class="display-4 mb-4">Discover Inspiring Book Journeys</h1>
+                    <p class="mb-0">Explore heartwarming stories of book donations, literacy impact, and the joy of sharing books with those in need. Join us in spreading knowledge and love for reading.</p>
+                </div>
+                <div class="blog-carousel owl-carousel">
+                    <div class="blog-item wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="blog-img p-4 pb-0">
+                            <a href="#">
+                                <img src="img/book-donation-1.jpg" class="img-fluid w-100" alt="Book Donation Event">
+                            </a>
+                        </div>
+                        <div class="blog-content p-4">
+                            <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4">
+                                <div class="small"><span class="fa fa-user text-primary me-2"></span> Alex J.</div>
+                                <div class="small"><span class="fa fa-calendar text-primary me-2"></span> 15 Feb 2025</div>
+                            </div>
+                            <a href="#" class="h4 d-inline-block mb-3">Bringing Books to Rural Schools</a>
+                            <p class="mb-3">A touching story of how donated books transformed the learning experience for children in underserved communities.</p>
+                            <a href="#" class="btn btn-dark py-2 px-4 ms-2"> <span class="me-2">Read More</span>  <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-item wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="blog-img p-4 pb-0">
+                            <a href="#">
+                                <img src="img/book-donation-2.jpg" class="img-fluid w-100" alt="Children Reading">
+                            </a>
+                        </div>
+                        <div class="blog-content p-4">
+                            <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4">
+                                <div class="small"><span class="fa fa-user text-primary me-2"></span> Sarah M.</div>
+                                <div class="small"><span class="fa fa-calendar text-primary me-2"></span> 10 Jan 2025</div>
+                            </div>
+                            <a href="#" class="h4 d-inline-block mb-3">How One Book Can Change a Life</a>
+                            <p class="mb-3">Discover how a single book inspired a young reader to dream big and pursue their passion for learning.</p>
+                            <a href="#" class="btn btn-dark py-2 px-4 ms-2"> <span class="me-2">Read More</span>  <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-item wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="blog-img p-4 pb-0">
+                            <a href="#">
+                                <img src="img/book-donation-3.jpg" class="img-fluid w-100" alt="Library Setup">
+                            </a>
+                        </div>
+                        <div class="blog-content p-4">
+                            <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4">
+                                <div class="small"><span class="fa fa-user text-primary me-2"></span> James R.</div>
+                                <div class="small"><span class="fa fa-calendar text-primary me-2"></span> 25 Dec 2024</div>
+                            </div>
+                            <a href="#" class="h4 d-inline-block mb-3">Building a Library from Donations</a>
+                            <p class="mb-3">See how a community came together to create a library using donated books, making reading accessible to all.</p>
+                            <a href="#" class="btn btn-dark py-2 px-4 ms-2"> <span class="me-2">Read More</span>  <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <div class="blog-img p-4 pb-0">
+                            <a href="#">
+                                <img src="img/book-donation-4.jpg" class="img-fluid w-100" alt="Happy Kids with Books">
+                            </a>
+                        </div>
+                        <div class="blog-content p-4">
+                            <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4">
+                                <div class="small"><span class="fa fa-user text-primary me-2"></span> Olivia K.</div>
+                                <div class="small"><span class="fa fa-calendar text-primary me-2"></span> 5 Dec 2024</div>
+                            </div>
+                            <a href="#" class="h4 d-inline-block mb-3">The Joy of Giving Books</a>
+                            <p class="mb-3">A heartwarming experience of how donating books brought happiness to children eager to learn.</p>
+                            <a href="#" class="btn btn-dark py-2 px-4 ms-2"> <span class="me-2">Read More</span>  <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog End -->
+
+        <!-- Explore Fitness Start -->
+        <div class="container-fluid explore py-5 wow zoomIn" data-wow-delay="0.2s">
+            <div class="container py-5 text-center">
+                <h1 class="display-1 text-white mb-0"> Explore Books for All</h1>
+                <a class="btn btn-primary py-3 px-4 px-md-5 me-2" href="https://www.youtube.com/embed/DWRcNpR6Kdc"><i class="fas fa-play-circle me-2"></i> <span>Watch Video</span></a>
+            </div>
+        </div>
+        <!-- Explore Fitness End -->
+
+
+
+         <!-- Testimonial Start -->
+        <div class="container-fluid testimonial bg-dark py-5" style="margin: 90px 0;">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Testimonial</h4>
+                    <h1 class="display-4 text-white">What Our Readers Are Saying</h1>
+                    <p class="text-white fs-5">At <strong>Books for All</strong>, we believe that books have the power to change lives. Our mission is to make reading accessible and enjoyable for everyone. Whether you're an avid reader, a student seeking knowledge, or someone discovering the joy of books, we are here to support you. Don't just take our word for it—hear what our readers have to say!</p>
+                </div>
+                <div class="testimonial-carousel owl-carousel wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="testimonial-item mx-auto" style="max-width: 900px;">
+                        <span class="fa fa-quote-left fa-3x quote-icon"></span>
+                        <div class="testimonial-img mb-4">
+                            <img src="img/testimonial-1.jpg" class="img-fluid" alt="Image">
+                        </div>
+                        <p class="fs-4 text-white mb-4">Books for All has completely transformed my reading habits. The collection is vast, and I always find something new to read. Highly recommend it!</p>
+                        <div class="d-block">
+                            <h4 class="text-white">Jane Doe</h4>
+                            <p class="m-0 pb-3">Book Enthusiast</p>
+                            <div class="d-flex">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item mx-auto" style="max-width: 900px;">
+                        <span class="fa fa-quote-left fa-3x quote-icon"></span>
+                        <div class="testimonial-img mb-4">
+                            <img src="img/testimonial-2.jpg" class="img-fluid" alt="Image">
+                        </div>
+                        <p class="fs-4 text-white mb-4">As a student, I rely on Books for All for my academic resources. The availability of educational materials has been a game-changer for my studies.</p>
+                        <div class="d-block">
+                            <h4 class="text-white">John Smith</h4>
+                            <p class="m-0 pb-3">University Student</p>
+                            <div class="d-flex">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item mx-auto" style="max-width: 900px;">
+                        <span class="fa fa-quote-left fa-3x quote-icon"></span>
+                        <div class="testimonial-img mb-4">
+                            <img src="img/testimonial-3.jpg" class="img-fluid" alt="Image">
+                        </div>
+                        <p class="fs-4 text-white mb-4">I love the ease of access to so many amazing books. Whether it's fiction or self-improvement, I always find something that inspires me.</p>
+                        <div class="d-block">
+                            <h4 class="text-white">Emily Johnson</h4>
+                            <p class="m-0 pb-3">Avid Reader</p>
+                            <div class="d-flex">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+
+
+
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5 mb-5 align-items-center">
+            <div class="col-lg-7">
+                <div class="position-relative d-flex" style="transform: skew(18deg);">
+                    <input class="form-control border-0 w-100 py-3 pe-5" type="text" placeholder="Email address to Subscribe">
+                    <button type="button" class="btn-primary py-2 px-4 ms-3"> <span>Subscribe</span></button>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-end">
+                    <a class="btn btn-primary btn-md-square me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-primary btn-md-square me-3" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-primary btn-md-square me-3" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-primary btn-md-square me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4"><i class="fas fa-hand-rock text-primary me-2"></i> Fitness</h4>
+                    <p class="mb-0">SHARE A BOOK, SHARE A DREAM..</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">Quick Links</h4>
+                    <a href="#"> Home</a>
+                    <a href="#"> About us</a>
+                    <a href="#"> Book Catalogue</a>
+                    <a href="#"> Our Features</a>
+                    <a href="#"> Our Blog & news</a>
+                    <a href="#"> Our Book Clubs</a>
+                    <a href="#"> Testimonials</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">Contact Info</h4>
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                <div>
+                                    <h5 class="text-white mb-2">Address</h5>
+                                    <p class="mb-0">Westlands Nairobi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <i class="fas fa-envelope text-primary me-2"></i>
+                                <div>
+                                    <h5 class="text-white mb-2">Mail Us</h5>
+                                    <p class="mb-0">Bookforall@prc.cx</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <i class="fa fa-phone-alt text-primary me-2"></i>
+                                <div>
+                                    <h5 class="text-white mb-2">Telephone</h5>
+                                    <p class="mb-0">+254 743 688354</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">Recent Exchanges</h4>
+                    <div class="row g-2">
+                        {% for i in 1|rjust:"12" %}
+                            <div class="col-3">
+                                <div class="footer-item-img">
+                                    <a href="#"><img src="{% static 'img/work-'|add:i|add:'.jpg' %}" class="img-fluid" alt=""></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Books_for_All</a>, All rights reserved.</span>
+            </div>
+            <div class="col-md-6 text-center text-md-end text-body">
+                Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">Simon Otieno</a>
+                and distributed By <a href="https://themewagon.com/">The K'Omuya Designs</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+<!-- Back to Top -->
+<div class="back-to-top">
+    <a href="#" class="btn"><i class="fa fa-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
+
+    </body>
+
+</html>

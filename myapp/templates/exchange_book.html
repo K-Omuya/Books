@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fitness - Fitness Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid header-top">
+        <div class="nav-shaps-2"></div>
+        <div class="container d-flex align-items-center">
+            <div class="d-flex align-items-center h-100">
+                <a href="#" class="navbar-brand" style="height: 125px;">
+                    <h1 class="text-primary mb-0"><i class="fas fa-hand-rock me-2"></i> Fitness</h1>
+                </a>
+            </div>
+            <div class="w-100 h-100">
+                <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
+                    <div class="row gx-0 align-items-center">
+                        <div class="col-lg-8 text-center text-lg-center mb-lg-0">
+                            <div class="d-flex flex-wrap">
+                                <div class="pe-4">
+                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>Bookforall@prc.cx</a>
+                                </div>
+                                <div class="pe-0">
+                                    <a href="#" class="text-muted small"><i class="fa fa-clock text-primary me-2"></i>Mon - Sat: 8.00 am-7.00 pm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end">
+                            <div class="d-flex justify-content-end">
+                                <div class="d-flex align-items-center small">
+                                </div>
+                                <div class="d-flex pe-3">
+                                    <a class="btn p-0 text-primary me-3" href="https://facebook.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-3" href="https://x.com/Bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-3" href="https://instagram.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a class="btn p-0 text-primary me-0" href="https://linkedin.com/bookforall20" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
+                    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
+                        <a href="#" class="navbar-brand-2">
+                            <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="fa fa-bars"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <div class="navbar-nav mx-0 mx-lg-auto">
+                                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'upload_book_exchange' %}" class="dropdown-item">Upload Book</a>
+                                        <a href="{% url 'book_exchange_catalogue' %}" class="dropdown-item">Book Catalogue</a>
+                                        <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                        <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
+                                    </div>
+                                </div>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                        <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                        <a href="{% url 'donate_book' %}" class="dropdown-item">Donate book</a>
+                                    </div>
+                                </div>
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                        <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                    </div>
+                                </div>
+                                <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
+                                        <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
+                                        <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
+                                        <a href="{% url 'testimonial' %}" class="dropdown-item">404 Page</a>
+                                    </div>
+                                </div>
+                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                                <div class="nav-btn ps-3">
+                                    <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"> <span>Get Quote</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+<style>
+    /* Main Container */
+    .main-container {
+        background-image: url('{% static "images/books_and_quill.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 50px 20px;
+        color: #ffffff;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+
+    /* Book Exchange Section */
+    .book-exchange-section {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #004080;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+    }
+
+    .book-search-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .book-search-container input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .book-search-container button {
+        width: 15%;
+        padding: 10px;
+        background-color: #FF8200;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .book-search-container button:hover {
+        background-color: #cc6800;
+    }
+
+    /* Book Listing */
+    .book-listing-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .book-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .book-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .book-card img {
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .book-card h3 {
+        font-size: 1.4rem;
+        color: #004080;
+        margin-bottom: 10px;
+    }
+
+    .book-card p {
+        font-size: 1rem;
+        color: #777777;
+        margin-bottom: 10px;
+    }
+
+    /* Book Upload Form */
+    .book-upload-form {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-upload-form h2 {
+        font-size: 2rem;
+        color: #004080;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .book-upload-form input, .book-upload-form select, .book-upload-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .book-upload-form button {
+        background-color: #FF8200;
+        color: white;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .book-upload-form button:hover {
+        background-color: #cc6800;
+    }
+</style>
+
+<div class="main-container">
+    <div class="header">
+        <h1>BOOKS FOR ALL</h1>
+        <p>SHARE A BOOK, SHARE A DREAM.</p>
+    </div>
+
+    <div class="book-exchange-section">
+        <h2>Book Exchange</h2>
+
+        <div class="book-search-container">
+            <input type="text" id="book-search" placeholder="Search for books..." />
+            <button id="search-btn">Search</button>
+        </div>
+
+        <div class="book-listing-container">
+            {% for book in donated_books %}
+            <div class="book-card">
+                <img src="{{ book.book_image.url }}" alt="Book Image">
+                <h3>{{ book.book_title }}</h3>
+                <p>By: {{ book.author }}</p>
+                <p>Genre: {{ book.get_book_type_display }}</p>
+                <p>Location: {{ book.donor_name }}</p>
+                <a href="#" class="view-more-button">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="book-upload-form">
+        <h2>Upload a Book</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Book for Exchange</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
