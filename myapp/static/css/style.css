@@ -440,7 +440,7 @@
 .bg-breadcrumb {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/goal-background-img.jpg);
+    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/back2.jpeg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -460,7 +460,7 @@
 
 /*** Carousel Hero Header Start ***/
 .hero-section {
-    background-image: url(../img/carousel-1.jpg);
+    background-image: url(../img/back2.jpeg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -473,7 +473,7 @@
 }
 
 .hero-bg-half-1 {
-    background-image: url(../img/header-2.jpg);
+    background-image: url(../img/back.jpg);
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
     filter: grayscale(15%);
     transform: scale(100% - 50%);
@@ -488,7 +488,7 @@
 }
 
 .hero-bg-half-2 {
-    background-image: url(../img/header-1.jpg);
+    background-image: url(../img/back.jpg);
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
     filter: grayscale(15%);
     transform: scale(100% - 50%);
@@ -964,7 +964,7 @@
     top: 0;
     left: 0;
     transform: skew(100deg);
-    background: rgba(200, 0, 54, 1);
+    background: rgb(248, 219, 23);
     border: none;
     transition: 0.5s;
     z-index: -1;
@@ -1063,7 +1063,7 @@
 .explore {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/back.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1172,9 +1172,7 @@
 .testimonial {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.9), rgba(12, 24, 68, 0.9)), url(../img/services-img.jpg);
     background-position: center top;
-    background-repeat: no-repeat;
     background-size: cover;
 }
 
@@ -1253,7 +1251,7 @@
     overflow: hidden;
     display: flex;
     border: 2px solid var(--bs-dark);
-    background: linear-gradient(rgba(255, 245, 225, 0.2), rgba(12, 24, 68, 0.1), rgba(200, 0, 54, 0.3));
+    background: linear-gradient(rgba(255, 245, 225, 0.2), rgba(12, 24, 68, 0.1), rgb(248, 219, 23));
 }
 
 .contact .contact-banner::after {
@@ -1279,12 +1277,11 @@
     background: var(--bs-white);
     color: var(--bs-primary);
 }
-/*** Contact End ***/
 
 /*** Footer Start ***/
 .footer {
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.9), rgba(12, 24, 68, 0.98)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(12, 24, 68, 0.9), rgba(12, 24, 68, 0.98)), url(../img/back.jpg);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
